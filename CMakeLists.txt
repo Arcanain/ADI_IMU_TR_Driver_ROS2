@@ -23,7 +23,7 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/SimpleCmd.srv"
- )
+)
 
 include_directories(
   lib/include
