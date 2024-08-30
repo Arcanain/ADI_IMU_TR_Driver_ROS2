@@ -39,6 +39,7 @@ This software has been confirmed to work on the following OS and ROS versions.
 - Ubuntu 18.04 LTS + ros2 eloquent (This is not maintained. If you use it, use the dashing_eloquent branch.)
 - Ubuntu 20.04 LTS + ros2 foxy or galactic (Use the foxy_galactic branch.This is not maintained. If you use it, use the foxy_galactic branch.)
 - Ubuntu 22.04 LTS + ros2 humble (Use the humble branch.)
+- Ubuntu 24.04 LTS + ros2 jazzy (Use the jazzy branch.)
 
 
 ### How to use
