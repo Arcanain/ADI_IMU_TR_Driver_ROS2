@@ -217,7 +217,7 @@ private:
     data->orientation.y = 0;
     data->orientation.z = 0;
     data->orientation.w = 1;
-
+    RCLCPP_INFO(this->get_logger(), "pub IMU");
     imu_data_pub_->publish(*data);
   }
 
@@ -246,6 +246,34 @@ private:
 
     tf_msg.transforms.push_back(tff);
     tf_br_->publish(tf_msg);
+
+    auto data = std::make_shared<sensor_msgs::msg::Imu>();
+
+    data->header.frame_id = frame_id_;
+    data->header.stamp = this->now();
+
+    double acc[3];
+    double gyro[3];
+    imu_.GetAcc(acc);
+    imu_.GetGyro(gyro);
+
+    // Linear acceleration
+    data->linear_acceleration.x = acc[0];
+    data->linear_acceleration.y = acc[1];
+    data->linear_acceleration.z = acc[2];
+
+    // Angular velocity
+    data->angular_velocity.x = gyro[0];
+    data->angular_velocity.y = gyro[1];
+    data->angular_velocity.z = gyro[2];
+
+    // Orientation (not provided)
+    data->orientation.x = q.getX();
+    data->orientation.y = q.getY();
+    data->orientation.z = q.getZ();
+    data->orientation.w = q.getW();
+    //RCLCPP_INFO(this->get_logger(), "pub IMU");
+    imu_data_pub_->publish(*data);
   }
 
   void UpdateAndPubRegMode()

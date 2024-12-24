@@ -79,5 +79,14 @@ def generate_launch_description():
             name='robot_state_publisher',
             output='log',
             parameters=[{'use_sim_time': False}, {"robot_description": open(urdf, 'r').read()}],
-        )
+        ),
+        Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz2',
+            arguments=['-d', rviz_config_dir],
+            parameters=[{'use_sim_time': False}],
+            output='log',
+            condition=IfCondition(LaunchConfiguration("with_rviz")))
+        
     ])
